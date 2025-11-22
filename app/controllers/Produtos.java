@@ -69,7 +69,11 @@ public class Produtos extends Controller {
             form();
             return;
         }
-
+        if(produto.categoria.id == null){
+        	flash.error("Preencha a categoria do produto.");
+        	form();
+        }
+        
         // Faz upload da imagem somente se o arquivo existir
         if (foto != null) {
             produto.photofileName = foto.getName();

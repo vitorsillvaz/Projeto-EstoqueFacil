@@ -24,6 +24,7 @@
               <th scope="col">Produto</th>
               <th scope="col">Categoria</th>
               <th scope="col">Preço</th>
+			  <th scope="col">Quantidade</th>
               <th scope="col"><i class="fa-solid fa-pen"></i></th>
               <th scope="col"><i class="fa-solid fa-trash"></i></th>
             </tr>
@@ -35,7 +36,6 @@
                    <img src="@{Produtos.produtoFoto(p.id)}" width="25px" height="25px" alt="img"/>
               </td>
               <td>
-				         
                  ${p.nomeProduto}
               </td>
               <td>
@@ -44,6 +44,9 @@
               <td>
                 R$ ${p.preco}
               </td>
+			  <td>
+			    ${p.quantidade}
+			  </td>
               <td>
                 <a href="@{Produtos.editar(p.id)}"  class="btn btn-sm btn-primary">Editar</a>
               </td>
@@ -54,7 +57,7 @@
             #{/list}
             #{else}
             <tr>
-              <td colspan="5" >Nenhuma produto cadastrado</td>
+              <td colspan="5" >Nenhum produto cadastrado</td>
             </tr>
             #{/else}
           </tbody>
