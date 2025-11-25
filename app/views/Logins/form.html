@@ -42,10 +42,14 @@
 				aria-hidden="true">&times;</span></button>
 	</div>
 	#{/if}
-	
-  
-  <!--================Login Box Area =================-->
-	<section class="login_box_area section-margin">
+
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section" 
+	 style=" 	display: flex;
+	            justify-content: center; 
+            	align-items: center;
+	            min-height: 100vh;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
@@ -59,20 +63,20 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="login_form_inner">
-						<img src="@{'/public/images/estoquefacil.png'}" alt="logo"
-									width="90px" height="60px">
+						<img src="@{'/public/images/estoquefacil.png'}" alt="logo" width="90px" height="60px">
 						<h3>Faça login para entrar</h3>
-						<form class="row login_form" action="@{Logins.logar}" id="contactForm" >
+						<form class="row login_form" action="@{Logins.logar}" id="contactForm">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="email" placeholder="Seu email" required>
+								<input type="text" class="form-control" id="name" name="email" placeholder="Seu email"
+									required>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="password" class="form-control" id="name" name="senha" placeholder="Informe sua senha" required>
+								<input type="password" class="form-control" id="name" name="senha"
+									placeholder="Informe sua senha" required>
 							</div>
-						
+
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit"
-								 class="button button-login w-100">Logar</button>
+								<button type="submit" value="submit" class="button button-login w-100">Logar</button>
 								<a href="#">Esqueceu sua senha?</a>
 							</div>
 						</form>

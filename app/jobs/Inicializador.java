@@ -15,44 +15,20 @@ public class Inicializador extends Job{
 	@Override
 	public void doJob() throws Exception {
 		if (Categoria.count() == 0) {
-			Categoria proteina = new Categoria("Proteina");
-			proteina.save();
+			Categoria vestuario = new Categoria("Vestuário");
+			vestuario.save();
 			
-			Categoria creatina = new Categoria("Creatina");
-			creatina.save();
+			Categoria alimento = new Categoria("Alimento");
+			alimento.save();
 			
-			Categoria vitamina = new Categoria("Vitaminas");
-			vitamina.save();
+			Categoria eletronicos = new Categoria("Eletrônicos");
+			eletronicos.save();
 			
-			Categoria pretreino = new Categoria("Pré-treino");
-			pretreino.save();
+			Categoria limpeza = new Categoria("Limpeza");
+			limpeza.save();
 			
-			Categoria postreino = new Categoria("Pós-treino");
-			postreino.save();
-			
-			Produto p1 = new Produto();
-			p1.nomeProduto = "Whey Protein Concentrado";
-			p1.preco = 124.90;
-			p1.quantidade = 13;
-			p1.categoria = proteina;
-			p1.status = Status.ATIVO;
-			p1.save();
-			
-			Produto p2 = new Produto();
-			p2.nomeProduto = "Pré-treino Insanity 300g";
-			p2.preco = 99.90;
-			p2.quantidade = 4;
-			p2.categoria = pretreino;
-			p2.status = Status.ATIVO;
-			p2.save();
-			
-			Produto p3 = new Produto();
-			p3.nomeProduto = "Multivitamínico (120 cáps)";
-			p3.preco = 47.90;
-			p3.quantidade = 32;
-			p3.categoria = vitamina;
-			p3.status = Status.ATIVO;
-			p3.save();
+			Categoria cosmeticos = new Categoria("Cosméticos");
+			cosmeticos.save();
 			
 			Usuario joao = new Usuario();
 			joao.email = "j@gmail.com";

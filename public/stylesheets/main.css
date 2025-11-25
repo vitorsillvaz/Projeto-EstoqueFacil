@@ -23,7 +23,6 @@ body {
 main {
 	flex: 1;
 	/* ocupa o espaço do meio */
-	padding: 20px;
 }
 .error{
 	color:red;
@@ -98,7 +97,8 @@ select{
 footer {
     background-color: #f8f9fa; /* ou a cor que preferir */
     text-align: center;
-    padding: 15px 0;
     width: 100%;
     margin-top: auto; /* empurra o footer para o final */
 }
+
+
