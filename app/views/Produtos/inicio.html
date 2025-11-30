@@ -25,10 +25,13 @@
 							</p>
 							<div class="price">R$ ${p.preco}</div>
 						</div>
-					</div>
-				</div>
-			</div>
+					
 			#{/list}
+			#{else}
+			<div style="margin: 0 auto;">
+				<p>Nenhum produto cadastrado: <a class="nav-link btn btn-sm btn-primary" href="@{Produtos.form}">Adicionar Produto</a></p>
+			</div>
+			#{/else}
 		</div>
 	</div>
 </section>

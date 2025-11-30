@@ -23,9 +23,9 @@ public class Produtos extends Controller {
         List<Categoria> categorias = Categoria.findAll();
         render(categorias);
     }
-
-    public static void listar(String termo) {
-        List<Produto> produtos;
+    
+    public static void listarAjax(String termo) {
+    	List<Produto> produtos= null;
         if (termo == null || termo.trim().isEmpty()) {
             produtos = Produto.find("status <> ?1", Status.INATIVO).fetch();
         } else {
@@ -34,7 +34,12 @@ public class Produtos extends Controller {
                 "%" + termo.toLowerCase() + "%", Status.INATIVO
             ).fetch();
         }
-        render(produtos, termo);
+        renderJSON(produtos);
+    }
+    
+    public static void listar() {
+        List<Produto> produtos = Produto.find("status <> ?1", Status.INATIVO).fetch();
+        render(produtos);
     }
 
     public static void detalhar(Produto produto) {
@@ -103,6 +108,6 @@ public class Produtos extends Controller {
             produto.status = Status.INATIVO;
             produto.save();
         }
-        listar(null);
+        listar();
     }
 }

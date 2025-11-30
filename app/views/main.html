@@ -1,130 +1,131 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
-	<title>#{get 'title' /}</title>
-	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-	#{get 'moreStyles' /}
-	<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+    <title>#{get 'title' /}</title>
 
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="icon" href="@{'/public/aroma-master/img/Fevicon.png'}" type="image/png">
+    <!-- CSS PRINCIPAL -->
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    #{get 'moreStyles' /}
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- CSS DO TEMPLATE AROMA -->
+    <link rel="icon" href="@{'/public/aroma-master/img/Fevicon.png'}" type="image/png">
+    <link rel="stylesheet" href="@{'/public/aroma-master/vendors/bootstrap/bootstrap.min.css'}">
+    <link rel="stylesheet" href="@{'/public/aroma-master/vendors/fontawesome/css/all.min.css'}">
+    <link rel="stylesheet" href="@{'/public/aroma-master/vendors/themify-icons/themify-icons.css'}">
+    <link rel="stylesheet" href="@{'/public/aroma-master/vendors/nice-select/nice-select.css'}">
+    <link rel="stylesheet" href="@{'/public/aroma-master/vendors/owl-carousel/owl.theme.default.min.css'}">
+    <link rel="stylesheet" href="@{'/public/aroma-master/vendors/owl-carousel/owl.carousel.min.css'}">
+    <link rel="stylesheet" href="@{'/public/aroma-master/css/style.css'}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-	<link rel="stylesheet" href="@{'/public/aroma-master/vendors/bootstrap/bootstrap.min.css'}">
-	<link rel="stylesheet" href="@{'/public/aroma-master/vendors/fontawesome/css/all.min.css'}">
-	<link rel="stylesheet" href="@{'/public/aroma-master/vendors/themify-icons/themify-icons.css'}">
-	<link rel="stylesheet" href="@{'/public/aroma-master/vendors/nice-select/nice-select.css'}">
-	<link rel="stylesheet" href="@{'/public/aroma-master/vendors/owl-carousel/owl.theme.default.min.css'}">
-	<link rel="stylesheet" href="@{'/public/aroma-master/vendors/owl-carousel/owl.carousel.min.css'}">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" href="@{'/public/aroma-master/css/style.css'}">
-	<link rel="stylesheet" href="@{'/public/stylesheets/main.css'}">
+    <!-- JQUERY ANTIGO DO PLAY (Necessário para Ajax) -->
+    <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript"></script>
 </head>
 
 <body>
-	    #{if flash.error}
-		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			<strong>Algo deu errado:</strong> ${flash.error}
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		</div>
-		#{/if}
 
-		#{if flash.success}
-		<div class="alert alert-success alert-dismissible fade show" role="alert">
-			<strong>Sucesso!</strong> ${flash.success}
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		</div>
-		#{/if}
-		<!--================ Start Header Menu Area =================-->
-		<header class="header_area" style="margin-top: 0px;">
-			<div class="main_menu">
-				<nav class="navbar navbar-expand-lg navbar-light">
-					<div class="container">
-					<div style="padding: 10px;"><img src="@{'/public/images/estoquefacil.png'}" alt="logo"
-								width="80px" height="60px"></div>
+    <!-- FLASH MESSAGES -->
+    #{if flash.error}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Algo deu errado:</strong> ${flash.error}
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    #{/if}
 
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-							<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-								<li class="nav-item"><a class="nav-link" href="@{Produtos.inicio}">Início</a></li>
-								
-								<li class="nav-item"><a class="nav-link" href="@{Produtos.form}">Cadastrar</a></li>
-								<li class="nav-item"><a class="nav-link" href="@{Produtos.listar}">Estoque</a></li>
-							</ul>
+    #{if flash.success}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Sucesso!</strong> ${flash.success}
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    #{/if}
 
-							<ul class="nav-shop">
-								<i class="fa-solid fa-user"></i>
-								<li class="nav-item">
+    <!-- CABEÇALHO -->
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
 
-									#{if session['usuarioLogado']}
+                    <div style="padding: 10px;">
+                        <img src="@{'/public/images/estoquefacil.png'}" alt="logo" width="80" height="60">
+                    </div>
 
-									<p>${session['usuarioLogado']}</p>
-									#{/if}
-								</li>
-								<li class="nav-item">
-									<i class="fa-solid fa-right-from-bracket"></i>
-									<button><a class="nav-link" href="@{Logins.sair}">SAIR</a></button>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</header>
-		<!--================ End Header Menu Area =================-->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-		#{doLayout /}
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 
-	<!--================ Start footer Area  =================-->
-	<footer class="footer">
+                        <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                            <li class="nav-item"><a class="nav-link" href="@{Produtos.inicio}">Início</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@{Produtos.form}">Cadastrar</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@{Produtos.listar}">Estoque</a></li>
+                        </ul>
 
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row d-flex">
-					<p class="col-lg-12 footer-text text-center">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> Todos os direitos reservados |
-						Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!--================ End footer Area  =================-->
+                        <ul class="nav-shop">
+                            <i class="fa-solid fa-user"></i>
+                            <li class="nav-item">
+                                #{if session['usuarioLogado']}
+                                <p>${session['usuarioLogado']}</p>
+                                #{/if}
+                            </li>
 
-	<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript"
-		charset="${_response_encoding}"></script>
-	#{get 'moreScripts' /}
-	<script src="@{'/public/aroma-master/vendors/jquery/jquery-3.2.1.min.js'}"></script>
-	<script src="@{'/public/aroma-master/vendors/bootstrap/bootstrap.bundle.min.js'}"></script>
-	<script src="@{'/public/aroma-master/vendors/skrollr.min.js'}"></script>
-	<script src="@{'/public/aroma-master/vendors/owl-carousel/owl.carousel.min.js'}"></script>
-	<script src="@{'/public/aroma-master/vendors/nice-select/jquery.nice-select.min.js'}"></script>
-	<script src="@{'/public/aroma-master/vendors/jquery.ajaxchimp.min.js'}"></script>
-	<script src="@{'/public/aroma-master/vendors/mail-script.js'}"></script>
-	<script src="@{'/public/aroma-master/js/main.js'}"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
+                            <li class="nav-item">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <button>
+                                    <a class="nav-link" href="@{Logins.sair}">SAIR</a>
+                                </button>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO DAS PÁGINAS -->
+    #{doLayout /}
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row d-flex">
+                    <p class="col-lg-12 footer-text text-center">
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script>
+                        Todos os direitos reservados | Template by Colorlib
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS DO TEMPLATE AROMA -->
+    <script src="@{'/public/aroma-master/vendors/bootstrap/bootstrap.bundle.min.js'}"></script>
+    <script src="@{'/public/aroma-master/vendors/skrollr.min.js'}"></script>
+    <script src="@{'/public/aroma-master/vendors/owl-carousel/owl.carousel.min.js'}"></script>
+    <script src="@{'/public/aroma-master/vendors/nice-select/jquery.nice-select.min.js'}"></script>
+    <script src="@{'/public/aroma-master/vendors/jquery.ajaxchimp.min.js'}"></script>
+    <script src="@{'/public/aroma-master/vendors/mail-script.js'}"></script>
+    <script src="@{'/public/aroma-master/js/main.js'}"></script>
+
+    <!-- Scripts adicionais da página (ajax por exemplo) -->
+    #{get 'moreScripts' /}
+
 </body>
 
 </html>

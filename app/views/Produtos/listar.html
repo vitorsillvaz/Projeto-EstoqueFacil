@@ -5,22 +5,27 @@
 <section class="order_details section-margin--small" style="margin-top: 50px;">
 	<div class="container ">
 		<div class="login_form_inner register_form_inner">
-			<h2 style="text-align: center;">Produtos disponíveis</h2> </br>
-			<form class="row login_form" action="@{Produtos.listar}">
+			
+			<h2 style="text-align: center;">Produtos disponíveis</h2>
+			<br>
 
-				<div class="col-md-12  search-box">
+			<!-- FORM PARA PESQUISA (AJAX) -->
+			<form class="row login_form" id="buscarProdutos" action="@{Produtos.listar}">
+				<div class="col-md-12 search-box">
 					<input type="text" name="termo" value="${termo}" placeholder="Buscar por nome ou categoria" />
 					<div class="right-icons">
 						<button class="btn-buscar"><i class="fa fa-search"></i></button>
 					</div>
 				</div>
-			</form> </br>
+			</form>
 
+			<br>
+
+			<!-- TABELA -->
 			<div class="table-responsive">
 				<table class="table">
 					<thead style="background-color: rgb(248, 248, 248);">
 						<tr>
-							<th scope="col"><i class="fa-solid fa-image"></i></th>
 							<th scope="col">Produto</th>
 							<th scope="col">Categoria</th>
 							<th scope="col">Preço</th>
@@ -29,44 +34,90 @@
 							<th scope="col"><i class="fa-solid fa-trash"></i></th>
 						</tr>
 					</thead>
-					<tbody>
-						#{list items: produtos, as:'p'}
-						<tr>
-							<td>
-								<img src="@{Produtos.produtoFoto(p.id)}" width="25px" height="25px" alt="img" />
-							</td>
-							<td>
-								${p.nomeProduto}
-							</td>
-							<td>
-								${p.categoria.categoria}
-							</td>
-							<td>
-								R$ ${p.preco}
-							</td>
-							<td>
-								${p.quantidade}
-							</td>
-							<td>
-								<a href="@{Produtos.editar(p.id)}" class="btn btn-sm btn-primary">Editar</a>
-							</td>
-							<td>
-								<a href="@{Produtos.remover(p.id)}" class="btn btn-sm btn-danger">Remover</a>
-							</td>
-						</tr>
+
+					<!-- TBODY QUE VAI RECEBER O AJAX -->
+					<tbody id="resultado">
+
+						<!-- LISTA INICIAL (SEM AJAX) -->
+						#{list items:produtos, as:'p'}
+							<tr>
+								<td>${p.nomeProduto}</td>
+
+								<td>
+									#{if p.categoria}
+										${p.categoria.categoria}
+									#{/if}
+								</td>
+
+								<td>R$ ${p.preco}</td>
+								<td>${p.quantidade}</td>
+
+								<td><a href="@{Produtos.editar(p.id)}" class="btn btn-sm btn-primary">Editar</a></td>
+								<td><a href="@{Produtos.remover(p.id)}" class="btn btn-sm btn-danger">Remover</a></td>
+							</tr>
 						#{/list}
 						#{else}
 						<tr>
 							<td colspan="7">
-							  <p>Nenhum produto cadastrado</p>	
-								<h4><a class="nav-link" href="@{Produtos.form}">Adicionar Produto</a></h4>
+								<div style="margin: 0 auto;">
+									<p>Nenhum produto cadastrado: <a class=" btn btn-sm btn-primary" href="@{Produtos.form}">Adicionar Produto</a></p>
+								</div>
 							</td>
 						</tr>
 						#{/else}
 					</tbody>
 				</table>
 			</div>
+
 		</div>
 	</div>
 </section>
-<!--================End Order Details Area =================-->
+
+<!--================ END Order Details =================-->
+
+<!-- SCRIPT AJAX DA PESQUISA -->
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#buscarProdutos").submit(function(e) {
+		e.preventDefault();
+		$.ajax({
+			type: "post",
+			url: "@{Produtos.listarAjax}",
+			data: $("#buscarProdutos").serialize(),
+
+			success: function(data) {
+				$("#resultado").empty(); // limpa tabela
+				// Nenhum resultado
+				if (!data || data.length === 0) {
+					$("#resultado").append(
+						"<tr>" +
+							"<td colspan='7' class='text-center'>" +
+								"<p>Nenhum produto encontrado</p>" +
+								"<h4><a class='nav-link' href='@{Produtos.form}'>Adicionar Produto</a></h4>" +
+							"</td>" +
+						"</tr>"
+					);
+					return;
+				}
+				// Preenche resultados
+				$.each(data, function(i, p) {
+					var categoria = "";
+					if (p.categoria && p.categoria.categoria) {
+						categoria = p.categoria.categoria;
+					}
+					$("#resultado").append(
+						"<tr>" +
+							"<td>" + p.nomeProduto + "</td>" +
+							"<td>" + categoria + "</td>" +
+							"<td>R$ " + p.preco + "</td>" +
+							"<td>" + p.quantidade + "</td>" +
+							"<td><a href='/produtos/editar?id=" + p.id + "' class='btn btn-sm btn-primary'>Editar</a></td>" +
+							"<td><a href='/produtos/remover?id=" + p.id + "' class='btn btn-sm btn-danger'>Remover</a></td>" +
+						"</tr>"
+					);
+				});
+			}
+		});
+	});
+});
+</script>

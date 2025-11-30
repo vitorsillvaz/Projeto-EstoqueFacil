@@ -25,7 +25,7 @@ public class Logins extends Controller {
 			session.put("usuarioLogado", usu.nome);
 			session.put("usuarioPerfil", usu.perfil.name());
 			flash.success("Logado com sucesso!");
-			Produtos.listar(null);
+			Produtos.listar();
 		}
 	}
 

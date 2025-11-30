@@ -23,7 +23,7 @@ public class Seguranca extends Controller {
   	    if (adminAnnotation != null && 
 		  !Perfil.ADMINISTRADOR.name().equals(perfil)) {
   	    	flash.error("Acesso restrito aos administradores do sistema.");
-  	    	Produtos.listar(null);
+  	    	Produtos.listar();
   	    }
  	}
 }
