@@ -41,7 +41,19 @@ public class Produtos extends Controller {
         List<Produto> produtos = Produto.find("status <> ?1", Status.INATIVO).fetch();
         render(produtos);
     }
+    public static void alterarQuantidade(Long id, int valor) {
+        Produto p = Produto.findById(id);
+        
+        if(p == null) {
+            error("Produto não encontrado");
+        }
 
+        // Evita quantidade negativa
+        p.quantidade = Math.max(0, p.quantidade + valor);
+        p.save();
+
+        renderText(p.quantidade);
+    }
     public static void detalhar(Produto produto) {
         render(produto);
     }

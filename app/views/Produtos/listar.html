@@ -50,7 +50,12 @@
 								</td>
 
 								<td>R$ ${p.preco}</td>
-								<td>${p.quantidade}</td>
+								<td>
+								    <button class="btn btn-sm btn-secondary" onclick="alterarQtd(${p.id}, -1)">-</button>
+								    <span id="qtd-${p.id}">${p.quantidade}</span>
+								    <button class="btn btn-sm btn-secondary" onclick="alterarQtd(${p.id}, +1)">+</button>
+								</td>
+
 
 								<td><a href="@{Produtos.editar(p.id)}" class="btn btn-sm btn-primary">Editar</a></td>
 								<td><a href="@{Produtos.remover(p.id)}" class="btn btn-sm btn-danger">Remover</a></td>
@@ -78,6 +83,21 @@
 <!-- SCRIPT AJAX DA PESQUISA -->
 <script type="text/javascript">
 $(document).ready(function() {
+	window.alterarQtd = function(id, valor) {
+			$.ajax({
+				type: "POST",
+				url: "@{Produtos.alterarQuantidade}",
+				data: { id: id, valor: valor },
+				success: function(novaQtd) {
+					// atualiza na tela sem recarregar
+					$("#qtd-" + id).text(novaQtd);
+				},
+				error: function() {
+					alert("Erro ao atualizar quantidade!");
+				}
+			});
+		};
+	
 	$("#buscarProdutos").submit(function(e) {
 		e.preventDefault();
 		$.ajax({
