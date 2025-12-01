@@ -22,17 +22,70 @@
     <link rel="stylesheet" href="@{'/public/aroma-master/vendors/owl-carousel/owl.theme.default.min.css'}">
     <link rel="stylesheet" href="@{'/public/aroma-master/vendors/owl-carousel/owl.carousel.min.css'}">
     <link rel="stylesheet" href="@{'/public/aroma-master/css/style.css'}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
+    <!-- Ícones Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- JQUERY ANTIGO DO PLAY (Necessário para Ajax) -->
     <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript"></script>
+
+    <style>
+        /* Ajuste do menu */
+        .nav-shop i {
+            font-size: 18px;
+            margin-right: 8px;
+            color: #333;
+        }
+
+        .nav-shop p {
+            margin: 0;
+            padding: 0 8px;
+            color: #333;
+        }
+
+        .nav-shop button {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .nav-shop button a {
+            color: #333;
+        }
+
+        .nav-shop button a:hover {
+            color: #ff6a00; /* Mesmo laranja padrão do template Aroma */
+        }
+
+        /* Alinhamento vertical perfeito */
+        .nav-shop {
+            display: flex;
+            align-items: center;
+            column-gap: 12px;
+        }
+
+        /* Ajuste do logo */
+        .navbar img {
+            border-radius: 6px;
+        }
+
+        /* Espaço abaixo do header */
+        header {
+            margin-bottom: 20px;
+        }
+    </style>
+
 </head>
 
 <body>
 
     <!-- FLASH MESSAGES -->
     #{if flash.error}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
         <strong>Algo deu errado:</strong> ${flash.error}
         <button type="button" class="close" data-dismiss="alert">
             <span>&times;</span>
@@ -41,7 +94,7 @@
     #{/if}
 
     #{if flash.success}
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
         <strong>Sucesso!</strong> ${flash.success}
         <button type="button" class="close" data-dismiss="alert">
             <span>&times;</span>
@@ -52,13 +105,16 @@
     <!-- CABEÇALHO -->
     <header class="header_area">
         <div class="main_menu">
+
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
 
-                    <div style="padding: 10px;">
+                    <!-- LOGO -->
+                    <a href="@{Produtos.inicio}" class="navbar-brand d-flex align-items-center">
                         <img src="@{'/public/images/estoquefacil.png'}" alt="logo" width="80" height="60">
-                    </div>
+                    </a>
 
+                    <!-- MENU MOBILE -->
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent">
                         <span class="icon-bar"></span>
@@ -66,6 +122,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
+                    <!-- MENU DESKTOP -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 
                         <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
@@ -74,29 +131,34 @@
                             <li class="nav-item"><a class="nav-link" href="@{Produtos.listar}">Estoque</a></li>
                         </ul>
 
+                        <!-- USUÁRIO / SAIR -->
                         <ul class="nav-shop">
+
                             <i class="fa-solid fa-user"></i>
+
                             <li class="nav-item">
                                 #{if session['usuarioLogado']}
                                 <p>${session['usuarioLogado']}</p>
                                 #{/if}
                             </li>
 
-                            <li class="nav-item">
+                            <li class="nav-item d-flex align-items-center">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                                 <button>
-                                    <a class="nav-link" href="@{Logins.sair}">SAIR</a>
+                                    <a class="nav-link" href="@{Logins.sair}">Sair</a>
                                 </button>
                             </li>
+
                         </ul>
 
                     </div>
                 </div>
             </nav>
+
         </div>
     </header>
 
-    <!-- CONTEÚDO DAS PÁGINAS -->
+    <!-- CONTEÚDO -->
     #{doLayout /}
 
     <!-- FOOTER -->
@@ -114,7 +176,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPTS DO TEMPLATE AROMA -->
+    <!-- SCRIPTS DO TEMPLATE -->
     <script src="@{'/public/aroma-master/vendors/bootstrap/bootstrap.bundle.min.js'}"></script>
     <script src="@{'/public/aroma-master/vendors/skrollr.min.js'}"></script>
     <script src="@{'/public/aroma-master/vendors/owl-carousel/owl.carousel.min.js'}"></script>
@@ -123,7 +185,6 @@
     <script src="@{'/public/aroma-master/vendors/mail-script.js'}"></script>
     <script src="@{'/public/aroma-master/js/main.js'}"></script>
 
-    <!-- Scripts adicionais da página (ajax por exemplo) -->
     #{get 'moreScripts' /}
 
 </body>

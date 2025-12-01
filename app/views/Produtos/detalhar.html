@@ -1,25 +1,45 @@
 #{extends 'main.html' /} 
 #{set title:'Detalhamento' /}
 
-<section class="login_box_area section-margin">
+<section class="login_box_area section-margin" style="margin-top: 50px;">
   <div class="container" id="registrar">
-    <div class="row">
-      <div class="col-lg-6" style="margin: 0 auto;">
-        <div class="login_form_inner register_form_inner">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
 
-          <h3 style="margin-bottom: 20px;">Informações do Produto</h3>
-          <p><strong>Nome:</strong> ${produto.nomeProduto}</p>
-          <p><strong>Valor:</strong> R$ ${produto.preco}</p>
-		  <p><strong>Quantidade:</strong>${produto.quantidade}</p>
-          <p><strong>Categoria:</strong> ${produto.categoria.categoria}</p>
+        <div class="login_form_inner register_form_inner p-4 shadow-sm" 
+             style="border-radius: 12px;">
 
-          <div class="mt-4" style="margin-bottom: 30px;">
-            <a href="@{Produtos.listar()}" class="btn button button-register">
+          <h3 class="text-center mb-4">Informações do Produto</h3>
+
+          <div class="mb-3">
+            <p class="mb-1"><strong>Nome:</strong></p>
+            <div class="p-2 border rounded bg-light">${produto.nomeProduto}</div>
+          </div>
+
+          <div class="mb-3">
+            <p class="mb-1"><strong>Valor:</strong></p>
+            <div class="p-2 border rounded bg-light">R$ ${produto.preco}</div>
+          </div>
+
+		  <div class="mb-3">
+            <p class="mb-1"><strong>Quantidade:</strong></p>
+            <div class="p-2 border rounded bg-light">${produto.quantidade}</div>
+          </div>
+
+          <div class="mb-4">
+            <p class="mb-1"><strong>Categoria:</strong></p>
+            <div class="p-2 border rounded bg-light">${produto.categoria.categoria}</div>
+          </div>
+
+          <div class="text-center">
+            <a href="@{Produtos.listar()}" 
+               class="btn button button-register w-100">
               Ir para listagem
             </a>
           </div>
-		  
+
         </div>
+
       </div>
     </div>
   </div>
