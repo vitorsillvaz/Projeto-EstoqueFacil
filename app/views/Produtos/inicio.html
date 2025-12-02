@@ -1,60 +1,59 @@
-#{extends 'main.html' /}
-#{set title:'inicio' /}
+#{extends 'main.html' /} #{set title:'inicio' /}
+<link rel="stylesheet" media="screen"
+	href="@{'/public/stylesheets/inicio.css'}">
 
-<section class="related-product-area" style="margin-top: 40px;">
-  <div class="container">
+<section class="offer skrollable skrollable-before" id="parallax-1"
+	data-anchor-target="#parallax-1"
+	data-300-top="background-position: 20px 30px"
+	data-top-bottom="background-position: 0 20px"
+	style="background-position: 20px 30px;">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-5">
+				<div class="offer__content text-center">
+					<h3>Estoque Fácil</h3>
+					<h4>Confira o estoque abaixo</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-    <div class="section-intro pb-60px text-center">
-      <h2>Todos os <span class="section-intro__style">Produtos</span></h2>
-    </div>
+<section class="section-margin calc-60px" id="section-margin">
+	<div class="container">
+		<div class="section-intro pb-60px">
+			<p>Veja seu estoque</p>
+			<h2>
+				Produtos <span class="section-intro__style">Cadastrados</span>
+			</h2>
+		</div>
 
-    <div class="row mt-4">
-
-      #{list items: produtos, as:'p'}
-      <div class="col-sm-6 col-xl-3 mb-4">
-
-        <div class="card shadow-sm border-0 h-100" style="border-radius: 12px;">
-
-          <div class="text-center p-3">
-            <img src="@{Produtos.produtoFoto(p.id)}"
-                 class="img-fluid"
-                 style="max-height: 140px; object-fit: cover; border-radius: 8px;">
-          </div>
-
-          <div class="card-body text-center">
-
-            <h5 style="font-size: 1.1rem; font-weight: 600;">
-				<a href="@{Produtos.detalhar(p.id)}" class="title" 
-				   style="text-decoration: none; color: #000;">
-                ${p.nomeProduto}
-              </a>
-            </h5>
-
-            <p class="text-muted mb-1" style="font-size: 0.9rem;">
-              #{if p.categoria}
-                ${p.categoria.categoria}
-              #{/if}
-            </p>
-
-            <div class="price mt-2" style="font-size: 1.1rem; font-weight: bold;">
-              R$ ${p.preco}
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-      #{/list}
-
-      #{else}
-      <div class="text-center mt-4">
-        <p>Nenhum produto cadastrado.</p>
-        <a class="btn btn-primary btn-sm" href="@{Produtos.form}">Adicionar Produto</a>
-      </div>
-      #{/else}
-
-    </div>
-
-  </div>
+		<div class="row">
+			#{list items: produtos, as:'p'}
+			<div class="col-md-6 col-lg-4 col-xl-3">
+				<div class="card text-center card-product">
+					<div class="card-product__img">
+						<img class="card-img" src="@{Produtos.produtoFoto(p.id)}" alt="">
+					</div>
+					<div class="card-body">
+						<p>#{if p.categoria} ${p.categoria.categoria} #{/if}</p>
+						<h4 class="card-product__title">
+							<a href="single-product.html">${p.nomeProduto}</a>
+						</h4>
+						<p class="card-product__price">R$ ${p.preco}</p>
+					</div>
+				</div>
+			</div>
+			#{/list} 
+			#{else}
+			<div style="margin: 0 auto;">
+				<div class="card text-center card-product">
+					<p>Nenhum produto cadastrado.</p>
+					<a class="button button--active mt-3 mt-xl-4" href="@{Produtos.form}">Adicionar
+						Produto</a>
+				</div>
+			</div>
+			#{/else}
+		</div>
+	</div>
 </section>
