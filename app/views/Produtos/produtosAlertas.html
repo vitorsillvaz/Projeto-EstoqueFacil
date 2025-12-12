@@ -1,0 +1,45 @@
+#{extends 'main.html' /} 
+#{set title:'Detalhamento' /}
+
+
+<section class="order_details section-margin--small" style="margin-top: 50px;">
+	<div class="container">
+		<div class="login_form_inner register_form_inner shadow p-4 rounded bg-white">
+
+			<h2 class="text-center mb-4" style="font-weight: 600;">📦 Produtos em Alerta</h2>
+
+
+			<!-- TABELA -->
+			<div class="table-responsive shadow-sm rounded">
+				<table class="table table-hover align-middle">
+					<thead class="bg-light">
+						<tr class="text-center">
+							<th>Produto</th>
+							<th>Categoria</th>
+							<th>Preço</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+
+					<tbody id="resultado">
+						#{list items:produtos, as:'p'}
+							<tr class="text-center">
+								<td class="fw-semibold">${p.nomeProduto}</td>
+
+								<td>${p.categoria?.categoria}</td>
+
+								<td class="fw-bold text-success">R$ ${p.preco}</td>
+
+								<td>
+									<div class="d-flex justify-content-center align-items-center gap-2" style="color: red;">
+										<span id="qtd-${p.id}" class="fw-bold">${p.quantidade}</span>
+									</div>
+								</td>
+							</tr>
+						#{/list}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>

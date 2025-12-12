@@ -37,6 +37,11 @@ public class Produtos extends Controller {
         renderJSON(produtos);
     }
     
+    public static void produtosAlertas() {
+        List<Produto> produtos = Produto.find("quantidade < ?1", 5).fetch();
+        render(produtos);
+    }
+
     public static void listar() {
         List<Produto> produtos = Produto.find("status <> ?1", Status.INATIVO).fetch();
         render(produtos);
